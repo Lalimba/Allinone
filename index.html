@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Obsession Trading Academy - Full Analysis</title>
+    <title>Obsession Trading Academy - Command Center</title>
     <style>
         html, body { height: 100%; margin: 0; padding: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
         
@@ -12,12 +12,12 @@
             height: 100vh; 
             padding: 10px; 
             box-sizing: border-box;
-            gap: 10px; 
+            gap: 8px; 
         }
         
         .academy-header { 
             text-align: center; 
-            font-size: 32px; 
+            font-size: 30px; 
             font-weight: 900; 
             background: linear-gradient(90deg, #ff0000, #ffae00, #00ff00, #00fbff, #bd00ff);
             -webkit-background-clip: text;
@@ -26,73 +26,59 @@
             margin: 0;
         }
 
-        /* UPDATED NAV HUB WITH TIGRIGNA TEXT */
+        /* EXPANDED NAV HUB */
         .nav-hub {
             display: flex;
-            align-items: center; /* Vertical center */
-            justify-content: space-between; /* Space between text and links */
-            padding: 10px 15px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 15px;
             background: #111;
             border: 1px solid #333;
             border-radius: 8px;
+            gap: 15px;
         }
 
         .tigrigna-text {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
-            line-height: 1.4;
-            /* Multi-color gradient for the Tigrigna text */
+            line-height: 1.3;
             background: linear-gradient(to right, #00fbff, #00ff00, #ffee00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-align: left;
-            max-width: 40%;
+            min-width: 320px;
         }
 
+        /* GRID FOR LINKS TO FILL SPACE */
         .nav-links-group {
             display: flex;
-            gap: 8px;
+            flex-wrap: wrap; /* Allows links to wrap if screen is small */
+            gap: 6px;
+            justify-content: flex-end;
+            flex: 1;
         }
 
         .nav-link {
             color: #fff;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
-            padding: 6px 10px;
+            padding: 5px 8px;
             border: 1px solid #333;
             border-radius: 4px;
             background: #1a1a1a;
             transition: 0.2s;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
         .nav-link:hover {
-            border-color: #00fbff;
-            color: #00fbff;
+            border-color: #ffae00;
+            color: #ffae00;
+            background: #222;
         }
 
-        .main-row { 
-            display: flex; 
-            flex: 1; 
-            gap: 10px; 
-            min-height: 0; 
-        }
-        
-        .chart-area { 
-            flex: 4; 
-            border: 1px solid #333; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            background: #131722;
-        }
-
-        .sidebar { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
-            min-width: 260px;
-        }
-
+        .main-row { display: flex; flex: 1; gap: 10px; min-height: 0; }
+        .chart-area { flex: 4; border: 1px solid #333; border-radius: 8px; overflow: hidden; background: #131722; }
+        .sidebar { flex: 1; display: flex; flex-direction: column; gap: 10px; min-width: 260px; }
         .widget-box { flex: 1; border: 1px solid #333; background: #131722; border-radius: 8px; overflow: hidden; }
         
         .button-group { display: flex; gap: 5px; }
@@ -128,10 +114,14 @@
             ካብ ጉዪ ምውኣል ክሳድ ምሓዝ ፎሎው በል ጥራሕ
         </div>
         <div class="nav-links-group">
-            <a href="https://www.coinglass.com/pro/liquidation/HeatMap" target="_blank" class="nav-link">🔥 HEATMAP</a>
-            <a href="https://www.binance.com/en/futures/home" target="_blank" class="nav-link">🔶 BINANCE</a>
-            <a href="https://www.bybit.com/en/trade/usdt/BTCUSDT" target="_blank" class="nav-link">📈 BYBIT</a>
-            <a href="https://sosovalue.com/" target="_blank" class="nav-link">📊 SOSOVALUE</a>
+            <a href="https://www.coinglass.com/pro/liquidation/HeatMap" target="_blank" class="nav-link">🔥 Heatmap</a>
+            <a href="https://www.coinglass.com/" target="_blank" class="nav-link">📊 Coinglass</a>
+            <a href="https://whale-alert.io/" target="_blank" class="nav-link">🐳 WhaleAlert</a>
+            <a href="https://coinmarketcap.com/" target="_blank" class="nav-link">💰 MarketCap</a>
+            <a href="https://x.com/" target="_blank" class="nav-link">🐦 X.com</a>
+            <a href="https://www.coingecko.com/" target="_blank" class="nav-link">🦎 Gecko</a>
+            <a href="https://www.cryptocraft.com/" target="_blank" class="nav-link">🛠️ CryptoCraft</a>
+            <a href="https://sosovalue.com/" target="_blank" class="nav-link">📊 SoSoValue</a>
             <a href="https://chatgpt.com" target="_blank" class="nav-link">🤖 AI</a>
         </div>
     </div>
