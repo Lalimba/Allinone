@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Obsession Trading Academy - Full Analysis</title>
     <style>
-        /* Fill the whole screen without scrolling */
         html, body { height: 100%; margin: 0; padding: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
         
         .container { 
@@ -16,7 +15,6 @@
             gap: 10px; 
         }
         
-        /* HEADER STYLES */
         .academy-header { 
             text-align: center; 
             font-size: 32px; 
@@ -28,36 +26,59 @@
             margin: 0;
         }
 
-        /* NAVIGATION HUB */
+        /* UPDATED NAV HUB WITH TIGRIGNA TEXT */
         .nav-hub {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 8px;
+            align-items: center; /* Vertical center */
+            justify-content: space-between; /* Space between text and links */
+            padding: 10px 15px;
             background: #111;
             border: 1px solid #333;
             border-radius: 8px;
         }
-        .nav-link {
-            color: #00fbff;
-            text-decoration: none;
-            font-size: 12px;
+
+        .tigrigna-text {
+            font-size: 14px;
             font-weight: bold;
-            padding: 5px 10px;
-            border: 1px solid #222;
-            border-radius: 4px;
+            line-height: 1.4;
+            /* Multi-color gradient for the Tigrigna text */
+            background: linear-gradient(to right, #00fbff, #00ff00, #ffee00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: left;
+            max-width: 40%;
         }
 
-        /* THE MAIN ANALYSIS ROW - This is now much taller */
+        .nav-links-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            background: #1a1a1a;
+            transition: 0.2s;
+        }
+        .nav-link:hover {
+            border-color: #00fbff;
+            color: #00fbff;
+        }
+
         .main-row { 
             display: flex; 
-            flex: 1; /* This pushes the row to take up all remaining height */
+            flex: 1; 
             gap: 10px; 
-            min-height: 0; /* Important for flex child sizing */
+            min-height: 0; 
         }
         
         .chart-area { 
-            flex: 4; /* Makes the chart wider */
+            flex: 4; 
             border: 1px solid #333; 
             border-radius: 8px; 
             overflow: hidden; 
@@ -69,7 +90,7 @@
             display: flex; 
             flex-direction: column; 
             gap: 10px; 
-            min-width: 250px;
+            min-width: 260px;
         }
 
         .widget-box { flex: 1; border: 1px solid #333; background: #131722; border-radius: 8px; overflow: hidden; }
@@ -102,11 +123,17 @@
     <div class="academy-header">Obsession Trading Academy tools</div>
 
     <div class="nav-hub">
-        <a href="https://www.coinglass.com/pro/liquidation/HeatMap" target="_blank" class="nav-link">🔥 COINGLASS HEATMAP</a>
-        <a href="https://www.binance.com/en/futures/home" target="_blank" class="nav-link">🔶 BINANCE</a>
-        <a href="https://www.bybit.com/en/trade/usdt/BTCUSDT" target="_blank" class="nav-link">📈 BYBIT</a>
-        <a href="https://sosovalue.com/" target="_blank" class="nav-link">📊 SOSOVALUE</a>
-        <a href="https://chatgpt.com" target="_blank" class="nav-link">🤖 AI ASSISTANT</a>
+        <div class="tigrigna-text">
+            ኩሉ አብ ኢድና ኢዩ ክመሃር ዝደሊ ንሕግዝ<br>
+            ካብ ጉዪ ምውኣል ክሳድ ምሓዝ ፎሎው በል ጥራሕ
+        </div>
+        <div class="nav-links-group">
+            <a href="https://www.coinglass.com/pro/liquidation/HeatMap" target="_blank" class="nav-link">🔥 HEATMAP</a>
+            <a href="https://www.binance.com/en/futures/home" target="_blank" class="nav-link">🔶 BINANCE</a>
+            <a href="https://www.bybit.com/en/trade/usdt/BTCUSDT" target="_blank" class="nav-link">📈 BYBIT</a>
+            <a href="https://sosovalue.com/" target="_blank" class="nav-link">📊 SOSOVALUE</a>
+            <a href="https://chatgpt.com" target="_blank" class="nav-link">🤖 AI</a>
+        </div>
     </div>
 
     <div class="main-row">
