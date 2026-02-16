@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Obsession Trading Academy - Home</title>
+    <title>Obsession Trading Academy - Crypto Hub</title>
     <style>
         body { background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; overflow: hidden; }
         .container { display: flex; flex-direction: column; height: 98vh; gap: 10px; }
@@ -18,7 +18,6 @@
             text-transform: uppercase;
         }
 
-        /* NAVIGATION HUB - UPDATED WITH CRYPTO LINKS */
         .nav-hub {
             display: flex;
             justify-content: center;
@@ -27,10 +26,9 @@
             background: #111;
             border: 1px solid #333;
             border-radius: 8px;
-            flex-wrap: wrap;
         }
         .nav-link {
-            color: #00fbff; /* Cyan for visibility */
+            color: #00fbff;
             text-decoration: none;
             font-size: 13px;
             font-weight: bold;
@@ -38,13 +36,11 @@
             padding: 6px 12px;
             border: 1px solid #222;
             border-radius: 4px;
-            text-transform: uppercase;
         }
         .nav-link:hover {
             color: #fff;
             background: #00fbff33;
             border-color: #00fbff;
-            box-shadow: 0 0 10px rgba(0,255,255,0.2);
         }
 
         .top-row { display: flex; flex: 1; gap: 10px; overflow: hidden; }
@@ -66,9 +62,12 @@
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
             { "symbols": [
-                {"proName": "FX_IDC:USDINR", "title": "USD/INR"},
-                {"description": "FED Rate", "proName": "ECONOMICS:USINTR"},
-                {"description": "Gold", "proName": "OANDA:XAUUSD"}
+                {"proName": "BINANCE:BTCUSDT", "title": "BTC/USDT"},
+                {"proName": "BINANCE:ETHUSDT", "title": "ETH/USDT"},
+                {"proName": "BINANCE:SOLUSDT", "title": "SOL/USDT"},
+                {"description": "Crypto Total Market Cap", "proName": "CRYPTOCAP:TOTAL"},
+                {"description": "BTC Dominance", "proName": "CRYPTOCAP:BTC.D"},
+                {"description": "Fear & Greed Index", "proName": "INDEX:BTCUSD"}
             ], "colorTheme": "dark", "isTransparent": true, "displayMode": "adaptive", "locale": "de" }
             </script>
         </div>
@@ -81,7 +80,6 @@
         <a href="https://www.binance.com/en/futures/home" target="_blank" class="nav-link">🔶 BINANCE</a>
         <a href="https://www.bybit.com/en/trade/usdt/BTCUSDT" target="_blank" class="nav-link">📈 BYBIT</a>
         <a href="https://sosovalue.com/" target="_blank" class="nav-link">📊 SOSOVALUE</a>
-        <a href="https://www.forexfactory.com" target="_blank" class="nav-link">📅 FOREX FACTORY</a>
         <a href="https://chatgpt.com" target="_blank" class="nav-link">🤖 AI ASSISTANT</a>
     </div>
 
