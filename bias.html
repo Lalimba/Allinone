@@ -80,6 +80,16 @@
   @media (max-width: 980px){
     .grid { grid-template-columns: 1fr; }
   }
+  /* ===== ETF FLOWS PANEL ===== */
+.etfTabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+.etfFrame {
+  width: 100%;
+  height: 360px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  background: rgba(0,0,0,0.18);
+}
+.etfNote { margin-top: 8px; font-size: 12px; color:#bdbdbd; line-height: 1.4; }
 </style>
 </head>
 
@@ -156,6 +166,31 @@
               <span class="pill"><span class="neutral">Short%</span> <span id="shortPct">—</span></span>
             </div>
           </div>
+          <!-- ===== ETF FLOWS (EMBED) ===== -->
+<div class="card" id="etfCard" style="margin-top:12px;">
+  <h3>BTC ETF Flows (Daily)</h3>
+
+  <div class="etfTabs">
+    <button class="btn" id="etfFarsideBtn" type="button">View: Farside</button>
+    <button class="btn" id="etfCoinglassBtn" type="button">View: CoinGlass</button>
+    <a class="btn" href="https://farside.co.uk/btc/" target="_blank" rel="noopener noreferrer">Open Farside ↗</a>
+    <a class="btn" href="https://www.coinglass.com/etf/bitcoin" target="_blank" rel="noopener noreferrer">Open CoinGlass ↗</a>
+  </div>
+
+  <iframe
+    id="etfFrame"
+    class="etfFrame"
+    src="https://farside.co.uk/btc/"
+    loading="lazy"
+    referrerpolicy="no-referrer"
+  ></iframe>
+
+  <div class="etfNote">
+    If CoinGlass doesn’t show inside the iframe, it’s because their site blocks embedding (X-Frame-Options).
+    In that case use the “Open CoinGlass ↗” button.
+  </div>
+</div>
+<!-- ===== END ETF FLOWS ===== -->
 
           <!-- NEW: Coinbase Premium -->
           <div class="metric" id="premiumCard">
@@ -653,3 +688,4 @@ setInterval(fetchCoinbasePremium, PREMIUM_REFRESH_MS);
 </script>
 </body>
 </html>
+
