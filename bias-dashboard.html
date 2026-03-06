@@ -176,24 +176,24 @@
       <div class="left">
         <div class="cards">
           <div class="card">
-            <div class="label">BTC Price</div>
-            <div class="value">71,114</div>
-            <div class="tiny">Update this manually or pull from API</div>
+            <div class="label">BTC Price (Realtime)</div>
+            <div class="value" id="btcPrice">-----</div>
+            <div class="tiny" id="btcPriceTime">Waiting for live feed</div>
           </div>
           <div class="card">
             <div class="label">ETF Daily Flow</div>
-            <div class="value red">-3.14K BTC</div>
-            <div class="tiny">CoinGlass / issuer sheets</div>
+            <div class="value" id="etfFlowValue">-----</div>
+            <div class="tiny" id="etfFlowNote">If no fresh file, keep empty</div>
           </div>
           <div class="card">
             <div class="label">Funding</div>
-            <div class="value red">0.0021%</div>
-            <div class="tiny">Slightly long-crowded</div>
+            <div class="value" id="fundingValue">-----</div>
+            <div class="tiny" id="fundingNote">Shows latest saved value or empty</div>
           </div>
           <div class="card">
             <div class="label">Open Interest</div>
-            <div class="value">83.43K</div>
-            <div class="tiny red">Daily delta: -0.63</div>
+            <div class="value" id="oiValue">-----</div>
+            <div class="tiny" id="oiNote">Shows latest saved value or empty</div>
           </div>
         </div>
 
@@ -422,5 +422,52 @@
       </div>
     </div>
   </div>
+  <script>
+    const weeklyRows = [
+      { date: '2026-03-05', price: '71,114', etf: '-3.14K BTC', funding: '0.0021%', oi: '83.43K', premium: '+4.67', bias: 'Defensive' },
+      { date: '2026-03-04', price: '74,000', etf: '+6.76K BTC', funding: '0.0019%', oi: '83.39K', premium: '+49.00', bias: 'Constructive' },
+      { date: '2026-03-03', price: '72,900', etf: '+3.27K BTC', funding: '0.0020%', oi: '83.10K', premium: '+18.00', bias: 'Neutral' },
+      { date: '2026-03-02', price: '73,200', etf: '+6.97K BTC', funding: '0.0018%', oi: '82.95K', premium: '+22.00', bias: 'Constructive' },
+      { date: '2026-02-27', price: '72,100', etf: '-407.72 BTC', funding: '0.0016%', oi: '82.70K', premium: '+7.50', bias: 'Neutral' },
+      { date: '2026-02-26', price: '72,800', etf: '+3.74K BTC', funding: '0.0017%', oi: '82.64K', premium: '+12.00', bias: 'Constructive' },
+      { date: '2026-02-25', price: '73,500', etf: '+7.91K BTC', funding: '0.0015%', oi: '82.40K', premium: '+15.00', bias: 'Constructive' }
+    ];
+
+    function setText(id, value, fallback = '-----') {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = value && String(value).trim() !== '' ? value : fallback;
+    }
+
+    function loadTopBarFromSavedData() {
+      const latest = weeklyRows && weeklyRows.length ? weeklyRows[0] : null;
+      setText('etfFlowValue', latest?.etf);
+      setText('fundingValue', latest?.funding);
+      setText('oiValue', latest?.oi);
+      setText('etfFlowNote', latest ? `Latest saved row: ${latest.date}` : 'If no fresh file, keep empty');
+      setText('fundingNote', latest ? `Latest saved row: ${latest.date}` : 'Shows latest saved value or empty');
+      setText('oiNote', latest ? `Latest saved row: ${latest.date}` : 'Shows latest saved value or empty');
+    }
+
+    async function loadRealtimeBTC() {
+      try {
+        const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+        if (!res.ok) throw new Error('price fetch failed');
+        const data = await res.json();
+        const price = Number(data.price);
+        if (!Number.isFinite(price)) throw new Error('bad price');
+        setText('btcPrice', price.toLocaleString(undefined, { maximumFractionDigits: 2 }));
+        const now = new Date();
+        setText('btcPriceTime', `Live from Binance · ${now.toLocaleTimeString()}`);
+      } catch (err) {
+        setText('btcPrice', '-----');
+        setText('btcPriceTime', 'Live price unavailable');
+      }
+    }
+
+    loadTopBarFromSavedData();
+    loadRealtimeBTC();
+    setInterval(loadRealtimeBTC, 15000);
+  </script>
 </body>
 </html>
