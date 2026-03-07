@@ -1,4 +1,6 @@
-requests
-pandas
 streamlit
-plotly
+ccxt
+pandas
+yfinance
+requests
+python-dotenv
