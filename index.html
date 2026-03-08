@@ -1,9 +1,51 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obsession Trading Academy - Command Center</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+  const supabaseUrl = 'https://jxvlvwjijnvklrrbvvpl.supabase.co';
+ const supabaseKey = 'sb_publishable_x7xKJZIFzw6H4nABGecPGA_SsY-VYIv';
+
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+  async function loadMetrics() {
+    const { data, error } = await supabaseClient
+      .from('daily_metrics')
+      .select('*')
+      .order('snapshot_date', { ascending: false });
+
+    if (error) {
+      console.error('Fehler beim Laden:', error);
+      document.getElementById('output').innerText = 'Fehler beim Laden der Daten';
+      return;
+    }
+
+    console.log(data);
+
+    const output = document.getElementById('output');
+    output.innerHTML = '';
+
+    data.forEach(row => {
+      const div = document.createElement('div');
+      div.style.padding = '10px';
+      div.style.marginBottom = '10px';
+      div.style.border = '1px solid #444';
+      div.style.borderRadius = '8px';
+      div.innerHTML = `
+        <strong>Datum:</strong> ${row.snapshot_date}<br>
+        <strong>BTC Price:</strong> ${row.btc_price_usd ?? 'n/a'}<br>
+        <strong>Coinbase BTC:</strong> ${row.coinbase_btc_usd ?? 'n/a'}<br>
+        <strong>Coinbase Premium:</strong> ${row.coinbase_premium_abs ?? 'n/a'}<br>
+      `;
+      output.appendChild(div);
+    });
+  }
+
+  loadMetrics();
+</script>
     <style>
         html, body { height: 100%; margin: 0; padding: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
 
@@ -265,11 +307,12 @@
             box-shadow: 0 0 0 2px rgba(255, 174, 0, 0.4) inset, 0 0 18px rgba(255, 174, 0, 0.15);
             border-color: #ffae00 !important;
         }
+        
         /* ===== END BINANCE DERIVATIVES ===== */
     </style>
 </head>
 <body>
-
+<div id="output">Lade Daten...</div>
 <div class="container">
     <div class="ticker-row">
         <div class="tradingview-widget-container">
