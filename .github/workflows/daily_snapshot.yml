@@ -20,7 +20,7 @@ jobs:
 
       - name: Install libraries
         run: |
-          pip install requests supabase
+          pip install requests pandas python-dotenv
 
       - name: Run snapshot script
         env:
