@@ -61,7 +61,7 @@
     }
     .cards {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
     .card, .panel {
@@ -81,51 +81,6 @@
       margin: 0 0 12px;
       font-size: 20px;
     }
-    .bias-box {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 14px;
-    }
-    .big-bias {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 170px;
-      background: linear-gradient(180deg, rgba(255,93,115,0.12), rgba(255,93,115,0.04));
-    }
-    .big-bias .score { font-size: 14px; color: var(--muted); }
-    .big-bias .state { font-size: 42px; font-weight: 900; margin-top: 8px; }
-    .metric-list {
-      display: grid;
-      gap: 12px;
-    }
-    .metric {
-      padding: 14px;
-      border-radius: 14px;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-    }
-    .metric .row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-    }
-    .metric .m-name { color: var(--muted); }
-    .metric .m-val { font-weight: 800; font-size: 22px; }
-    .table-wrap { overflow: auto; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    th, td {
-      padding: 10px 8px;
-      border-bottom: 1px solid var(--border);
-      text-align: right;
-      white-space: nowrap;
-    }
-    th:first-child, td:first-child { text-align: left; }
     .source-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -140,6 +95,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
+      align-items: stretch;
     }
     iframe {
       width: 100%;
@@ -148,23 +104,29 @@
       border-radius: 16px;
       background: #0a0f18;
     }
+    .macro-box {
+      min-height: 360px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #0a0f18;
+      overflow: hidden;
+    }
+    .macro-fallback {
+      padding: 16px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
     .notes {
       line-height: 1.6;
       color: var(--muted);
     }
-    .clickable-card {
-      cursor: pointer;
-      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-    .clickable-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--blue);
-      box-shadow: 0 0 0 1px rgba(86,166,255,0.18);
+    .checklist-line {
+      margin-bottom: 8px;
     }
     @media (max-width: 1100px) {
       .grid { grid-template-columns: 1fr; }
       .cards { grid-template-columns: repeat(2, 1fr); }
-      .bias-box, .iframe-grid, .source-grid { grid-template-columns: 1fr; }
+      .iframe-grid, .source-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 700px) {
       .cards { grid-template-columns: 1fr; }
@@ -189,188 +151,44 @@
             <div class="value" id="btcPrice">-----</div>
             <div class="tiny" id="btcPriceTime">Waiting for live feed</div>
           </div>
-          <div class="card clickable-card" id="etfFlowCard">
-            <div class="label">ETF Daily Flow</div>
-            <div class="value" id="etfFlowValue">-----</div>
-            <div class="tiny" id="etfFlowNote">Click to open CoinGlass ETF below</div>
-          </div>
           <div class="card">
             <div class="label">Funding</div>
             <div class="value" id="fundingValue">-----</div>
-            <div class="tiny" id="fundingNote">Shows latest saved value or empty</div>
+            <div class="tiny" id="fundingNote">Waiting for live feed</div>
           </div>
           <div class="card">
             <div class="label">Open Interest</div>
             <div class="value" id="oiValue">-----</div>
-            <div class="tiny" id="oiNote">Shows latest saved value or empty</div>
+            <div class="tiny" id="oiNote">Waiting for live feed</div>
           </div>
-        </div>
-
-        <div class="panel">
-          <h2 class="section-title">Bias Engine</h2>
-          <div class="bias-box">
-            <div class="card big-bias">
-              <div class="score">Score: -2</div>
-              <div class="state red">Defensive</div>
-              <div class="tiny">ETF outflow + weak macro + positive funding = caution</div>
-            </div>
-            <div class="metric-list">
-              <div class="metric">
-                <div class="row"><div class="m-name">Coinbase Premium</div><div class="m-val green">+4.67</div></div>
-              </div>
-              <div class="metric">
-                <div class="row"><div class="m-name">Long / Short</div><div class="m-val">1.162</div></div>
-              </div>
-              <div class="metric">
-                <div class="row"><div class="m-name">24h Liquidations</div><div class="m-val red">High</div></div>
-              </div>
-            </div>
-            <div class="metric-list">
-              <div class="metric">
-                <div class="row"><div class="m-name">Macro State</div><div class="m-val yellow">Risk-Off</div></div>
-              </div>
-              <div class="metric">
-                <div class="row"><div class="m-name">SPX / NQ</div><div class="m-val red">Weak</div></div>
-              </div>
-              <div class="metric">
-                <div class="row"><div class="m-name">DXY / Yields</div><div class="m-val yellow">Watch</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h2 class="section-title">Weekly Saved Market File</h2>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Price</th>
-                  <th>ETF Flow</th>
-                  <th>Funding</th>
-                  <th>OI</th>
-                  <th>Coinbase Premium</th>
-                  <th>Bias</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2026-03-05</td>
-                  <td>71,114</td>
-                  <td class="red">-3.14K BTC</td>
-                  <td class="red">0.0021%</td>
-                  <td>83.43K</td>
-                  <td class="green">+4.67</td>
-                  <td class="red">Defensive</td>
-                </tr>
-                <tr>
-                  <td>2026-03-04</td>
-                  <td>74,000</td>
-                  <td class="green">+6.76K BTC</td>
-                  <td class="green">0.0019%</td>
-                  <td>83.39K</td>
-                  <td class="green">+49.00</td>
-                  <td class="green">Constructive</td>
-                </tr>
-                <tr>
-                  <td>2026-03-03</td>
-                  <td>72,900</td>
-                  <td class="green">+3.27K BTC</td>
-                  <td>0.0020%</td>
-                  <td>83.10K</td>
-                  <td class="green">+18.00</td>
-                  <td>Neutral</td>
-                </tr>
-                <tr>
-                  <td>2026-03-02</td>
-                  <td>73,200</td>
-                  <td class="green">+6.97K BTC</td>
-                  <td>0.0018%</td>
-                  <td>82.95K</td>
-                  <td class="green">+22.00</td>
-                  <td class="green">Constructive</td>
-                </tr>
-                <tr>
-                  <td>2026-02-27</td>
-                  <td>72,100</td>
-                  <td class="red">-407.72 BTC</td>
-                  <td>0.0016%</td>
-                  <td>82.70K</td>
-                  <td class="green">+7.50</td>
-                  <td>Neutral</td>
-                </tr>
-                <tr>
-                  <td>2026-02-26</td>
-                  <td>72,800</td>
-                  <td class="green">+3.74K BTC</td>
-                  <td>0.0017%</td>
-                  <td>82.64K</td>
-                  <td class="green">+12.00</td>
-                  <td class="green">Constructive</td>
-                </tr>
-                <tr>
-                  <td>2026-02-25</td>
-                  <td>73,500</td>
-                  <td class="green">+7.91K BTC</td>
-                  <td>0.0015%</td>
-                  <td>82.40K</td>
-                  <td class="green">+15.00</td>
-                  <td class="green">Constructive</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="tiny">This is your 7-day saved file. Add one row per day so funding, open interest, and Coinbase premium stay visible in history.</div>
-        </div>
-
-        <div class="panel">
-          <h2 class="section-title">ETF Flow Table</h2>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>IBIT</th>
-                  <th>FBTC</th>
-                  <th>ARKB</th>
-                  <th>BITB</th>
-                  <th>Others</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2026-03-05</td>
-                  <td class="red">-1.22K</td>
-                  <td class="red">-660.78</td>
-                  <td class="red">-312.49</td>
-                  <td class="red">-638.75</td>
-                  <td class="green">+74.34</td>
-                  <td class="red">-3.14K</td>
-                </tr>
-                <tr>
-                  <td>2026-03-04</td>
-                  <td class="green">+4.49K</td>
-                  <td class="green">+702.83</td>
-                  <td class="green">+213.78</td>
-                  <td class="green">+117.14</td>
-                  <td class="green">+1.24K</td>
-                  <td class="green">+6.76K</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="tiny">Add more rows daily. This becomes your own market memory.</div>
         </div>
 
         <div class="panel" id="embeddedSourcesPanel">
           <h2 class="section-title">Embedded Sources</h2>
           <div class="iframe-grid">
             <iframe id="etfFrame" src="https://www.coinglass.com/etf/bitcoin" title="CoinGlass ETF"></iframe>
-            <iframe src="https://www.tradingview.com/chart/" title="TradingView"></iframe>
+
+            <div class="macro-box">
+              <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <div class="macro-fallback">
+                  Important Macro US Appointments
+                </div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+                {
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "width": "100%",
+                  "height": "360",
+                  "locale": "en",
+                  "importanceFilter": "1",
+                  "currencyFilter": "USD"
+                }
+                </script>
+              </div>
+            </div>
           </div>
-          <div class="tiny">Some sites block embedding. If they do, the ETF click will open CoinGlass in a new tab automatically.</div>
+          <div class="tiny">If CoinGlass blocks embedding, open it in a new tab and keep the macro panel here for US events.</div>
         </div>
       </div>
 
@@ -404,15 +222,12 @@
         <div class="panel">
           <h2 class="section-title">Daily Checklist</h2>
           <div class="notes">
-            1. ETF flow positive or negative?<br>
-            2. Coinbase premium rising or falling?<br>
-            3. Funding neutral, overheated, or negative?<br>
-            4. OI rising with price or falling with price?<br>
-            5. Macro risk-on or risk-off?<br><br>
-            Final bias rule example:<br>
-            <span class="green">Bullish</span> = ETF inflow + positive premium + neutral/negative funding + stable macro<br>
-            <span class="yellow">Neutral</span> = mixed flows + range price action<br>
-            <span class="red">Defensive</span> = ETF outflow + weak macro + long-crowded positioning
+            <div class="checklist-line">1. ETF flow positive or negative?</div>
+            <div class="checklist-line">2. Coinbase premium rising or falling?</div>
+            <div class="checklist-line">3. Funding neutral, overheated, or negative?</div>
+            <div class="checklist-line">4. OI rising with price or falling with price?</div>
+            <div class="checklist-line">5. Macro risk-on or risk-off?</div>
+            <div class="checklist-line">6. Important US appointments today?</div>
           </div>
         </div>
 
@@ -422,10 +237,10 @@
             Start manual first. Once the layout works, connect APIs one by one.<br><br>
             Best build order:<br>
             1. Static HTML layout<br>
-            2. Manual inputs in one JSON file<br>
-            3. API fetch for Binance / Coinbase / CoinGlass alternatives<br>
-            4. Auto score calculation<br>
-            5. History log and alerts
+            2. Realtime BTC / Funding / OI<br>
+            3. Macro calendar and market context<br>
+            4. Manual analysis notes<br>
+            5. Alerts only when really needed
           </div>
         </div>
       </div>
@@ -433,16 +248,6 @@
   </div>
 
   <script>
-    const weeklyRows = [
-      { date: '2026-03-05', price: '71,114', etf: '-3.14K BTC', funding: '0.0021%', oi: '83.43K', premium: '+4.67', bias: 'Defensive' },
-      { date: '2026-03-04', price: '74,000', etf: '+6.76K BTC', funding: '0.0019%', oi: '83.39K', premium: '+49.00', bias: 'Constructive' },
-      { date: '2026-03-03', price: '72,900', etf: '+3.27K BTC', funding: '0.0020%', oi: '83.10K', premium: '+18.00', bias: 'Neutral' },
-      { date: '2026-03-02', price: '73,200', etf: '+6.97K BTC', funding: '0.0018%', oi: '82.95K', premium: '+22.00', bias: 'Constructive' },
-      { date: '2026-02-27', price: '72,100', etf: '-407.72 BTC', funding: '0.0016%', oi: '82.70K', premium: '+7.50', bias: 'Neutral' },
-      { date: '2026-02-26', price: '72,800', etf: '+3.74K BTC', funding: '0.0017%', oi: '82.64K', premium: '+12.00', bias: 'Constructive' },
-      { date: '2026-02-25', price: '73,500', etf: '+7.91K BTC', funding: '0.0015%', oi: '82.40K', premium: '+15.00', bias: 'Constructive' }
-    ];
-
     function setText(id, value, fallback = '-----') {
       const el = document.getElementById(id);
       if (!el) return;
@@ -470,16 +275,6 @@
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       });
-    }
-
-    function loadTopBarFromSavedData() {
-      const latest = weeklyRows && weeklyRows.length ? weeklyRows[0] : null;
-      setText('etfFlowValue', latest?.etf);
-      setText('fundingValue', latest?.funding);
-      setText('oiValue', latest?.oi);
-      setText('etfFlowNote', latest ? `Latest saved row: ${latest.date} · Click to open CoinGlass ETF below` : 'Click to open CoinGlass ETF below');
-      setText('fundingNote', latest ? `Latest saved row: ${latest.date}` : 'Shows latest saved value or empty');
-      setText('oiNote', latest ? `Latest saved row: ${latest.date}` : 'Shows latest saved value or empty');
     }
 
     async function fetchJson(url, options = {}) {
@@ -523,9 +318,8 @@
 
         setText('fundingNote', note);
       } catch (err) {
-        const latest = weeklyRows && weeklyRows.length ? weeklyRows[0] : null;
-        setText('fundingValue', latest?.funding);
-        setText('fundingNote', latest ? `Latest saved row: ${latest.date}` : 'Shows latest saved value or empty');
+        setText('fundingValue', '-----');
+        setText('fundingNote', 'Live funding unavailable');
         console.error('Funding realtime error:', err);
       }
     }
@@ -541,39 +335,13 @@
         const updated = data.time ? new Date(Number(data.time)) : new Date();
         setText('oiNote', `Live from Binance Futures · ${updated.toLocaleTimeString()}`);
       } catch (err) {
-        const latest = weeklyRows && weeklyRows.length ? weeklyRows[0] : null;
-        setText('oiValue', latest?.oi);
-        setText('oiNote', latest ? `Latest saved row: ${latest.date}` : 'Shows latest saved value or empty');
+        setText('oiValue', '-----');
+        setText('oiNote', 'Live OI unavailable');
         console.error('OI realtime error:', err);
       }
     }
 
-    function setupETFCardClick() {
-      const etfCard = document.getElementById('etfFlowCard');
-      const etfFrame = document.getElementById('etfFrame');
-      const embeddedPanel = document.getElementById('embeddedSourcesPanel');
-
-      if (!etfCard || !etfFrame || !embeddedPanel) return;
-
-      etfCard.addEventListener('click', () => {
-        etfFrame.src = 'https://www.coinglass.com/etf/bitcoin';
-        embeddedPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        setTimeout(() => {
-          try {
-            const currentSrc = etfFrame.src;
-            if (!currentSrc || currentSrc.includes('about:blank')) {
-              window.open('https://www.coinglass.com/etf/bitcoin', '_blank');
-            }
-          } catch (e) {
-            console.error('ETF frame check error:', e);
-          }
-        }, 1500);
-      });
-    }
-
     function startRealtimeLoops() {
-      loadTopBarFromSavedData();
       loadRealtimeBTC();
       loadRealtimeFunding();
       loadRealtimeOI();
@@ -583,7 +351,6 @@
       setInterval(loadRealtimeOI, 15000);
     }
 
-    setupETFCardClick();
     startRealtimeLoops();
   </script>
 </body>
