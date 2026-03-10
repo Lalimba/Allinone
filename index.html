@@ -1,51 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obsession Trading Academy - Command Center</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-  const supabaseUrl = 'https://jxvlvwjijnvklrrbvvpl.supabase.co';
- const supabaseKey = 'sb_publishable_x7xKJZIFzw6H4nABGecPGA_SsY-VYIv';
 
-  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-  async function loadMetrics() {
-    const { data, error } = await supabaseClient
-      .from('daily_metrics')
-      .select('*')
-      .order('snapshot_date', { ascending: false });
-
-    if (error) {
-      console.error('Fehler beim Laden:', error);
-      document.getElementById('output').innerText = 'Fehler beim Laden der Daten';
-      return;
-    }
-
-    console.log(data);
-
-    const output = document.getElementById('output');
-    output.innerHTML = '';
-
-    data.forEach(row => {
-      const div = document.createElement('div');
-      div.style.padding = '10px';
-      div.style.marginBottom = '10px';
-      div.style.border = '1px solid #444';
-      div.style.borderRadius = '8px';
-      div.innerHTML = `
-        <strong>Datum:</strong> ${row.snapshot_date}<br>
-        <strong>BTC Price:</strong> ${row.btc_price_usd ?? 'n/a'}<br>
-        <strong>Coinbase BTC:</strong> ${row.coinbase_btc_usd ?? 'n/a'}<br>
-        <strong>Coinbase Premium:</strong> ${row.coinbase_premium_abs ?? 'n/a'}<br>
-      `;
-      output.appendChild(div);
-    });
-  }
-
-  loadMetrics();
-</script>
     <style>
         html, body { height: 100%; margin: 0; padding: 0; background-color: #000; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
 
@@ -69,7 +28,6 @@
             margin: 0;
         }
 
-        /* EXPANDED NAV HUB */
         .nav-hub {
             display: flex;
             align-items: center;
@@ -92,10 +50,9 @@
             min-width: 380px;
         }
 
-        /* GRID FOR LINKS TO FILL SPACE */
         .nav-links-group {
             display: flex;
-            flex-wrap: wrap; /* Allows links to wrap if screen is small */
+            flex-wrap: wrap;
             gap: 6px;
             justify-content: flex-end;
             flex: 1;
@@ -120,7 +77,6 @@
             background: #222;
         }
 
-        /* LIGHT HIERARCHY (no content removed) */
         .nav-link.core { border-color: #2b2b2b; }
         .nav-link.core:hover { border-color: #00ff00; color: #00ff00; }
 
@@ -150,7 +106,6 @@
 
         .ticker-row { height: 40px; }
 
-        /* SMALL LOOP VIDEO */
         .mini-video-box {
             position: fixed;
             bottom: 15px;
@@ -174,7 +129,6 @@
             color: #00ff00;
         }
 
-        /* ===== BINANCE DERIVATIVES (NEXT LEVEL) ===== */
         .binance-deriv {
             padding: 12px 14px;
             box-sizing: border-box;
@@ -307,12 +261,10 @@
             box-shadow: 0 0 0 2px rgba(255, 174, 0, 0.4) inset, 0 0 18px rgba(255, 174, 0, 0.15);
             border-color: #ffae00 !important;
         }
-        
-        /* ===== END BINANCE DERIVATIVES ===== */
     </style>
 </head>
 <body>
-<div id="output">Lade Daten...</div>
+
 <div class="container">
     <div class="ticker-row">
         <div class="tradingview-widget-container">
@@ -338,7 +290,6 @@
         </div>
 
         <div class="nav-links-group">
-            <!-- CORE (fast pre-trade checks) -->
             <a href="https://www.tradingview.com/markets/" target="_blank" rel="noopener noreferrer" class="nav-link core">📈 Markets</a>
             <a href="https://www.investing.com/economic-calendar/" target="_blank" rel="noopener noreferrer" class="nav-link core">🗓️ Calendar</a>
             <a href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html" target="_blank" rel="noopener noreferrer" class="nav-link core">🏦 FedWatch</a>
@@ -349,7 +300,6 @@
 
             <span class="nav-sep" aria-hidden="true"></span>
 
-            <!-- LIQUIDITY / DERIVATIVES -->
             <a href="https://coinank.com/chart/derivatives/liq-map" target="_blank" rel="noopener noreferrer" class="nav-link core">🧨 Liquidation</a>
             <a href="https://coinank.com/chart/derivatives/liq-map/binance/btcusdt/1w" target="_blank" rel="noopener noreferrer" class="nav-link core">🧨 LQ Map BTC</a>
             <a href="https://www.coinglass.com/pro/liquidation/HeatMap" target="_blank" rel="noopener noreferrer" class="nav-link core">🔥 Heatmap</a>
@@ -357,7 +307,6 @@
 
             <span class="nav-sep" aria-hidden="true"></span>
 
-            <!-- RESEARCH -->
             <a href="https://whale-alert.io/" target="_blank" rel="noopener noreferrer" class="nav-link research">🐳 WhaleAlert</a>
             <a href="https://www.glassnode.com/" target="_blank" rel="noopener noreferrer" class="nav-link research">🔗 OnChain</a>
             <a href="https://defillama.com/" target="_blank" rel="noopener noreferrer" class="nav-link research">💧 DeFiLlama</a>
@@ -366,7 +315,6 @@
 
             <span class="nav-sep" aria-hidden="true"></span>
 
-            <!-- GENERAL -->
             <a href="https://coinmarketcap.com/" target="_blank" rel="noopener noreferrer" class="nav-link">💰 MarketCap</a>
             <a href="bias-dashboard.html" target="_blank" rel="noopener noreferrer" class="nav-link core">🚀 BTC-Dashboard</a>
             <a href="macro.html" target="_blank" rel="noopener noreferrer" class="nav-link core">🌍 Macro</a>
@@ -381,7 +329,6 @@
 
             <span class="nav-sep" aria-hidden="true"></span>
 
-            <!-- INVITE (kept, but visually separated) -->
             <a href="https://coinank.com/en/invite/register?referral=1311828" target="_blank" rel="noopener noreferrer" class="nav-link invite">🎁 CoinAnk Invite</a>
         </div>
     </div>
@@ -427,7 +374,6 @@
                 </script>
             </div>
 
-            <!-- ===== BINANCE BTCUSDT DERIVATIVES (NEXT LEVEL) ===== -->
             <div class="widget-box" id="binanceBox">
                 <div class="binance-deriv">
                     <div class="binance-deriv-header">
@@ -511,12 +457,10 @@
                     </div>
                 </div>
             </div>
-            <!-- ===== END BINANCE ===== -->
         </div>
     </div>
 </div>
 
-<!-- MINI LOOP VIDEO (overlay, does not change layout) -->
 <div class="mini-video-box">
     <video autoplay loop muted playsinline>
         <source src="nohasleep.mp4" type="video/mp4">
@@ -527,14 +471,6 @@
 </div>
 
 <script>
-/**
- * NEXT LEVEL BINANCE DASHBOARD (NO CHANGES TO YOUR OLD CONTENTS)
- * - Pulls directly from Binance Futures REST
- * - Shows: OI, Funding, Mark/Index, 24h stats
- * - Adds: Δ OI, Δ% OI, color logic, simple signal, sparkline
- * - Refresh: 10s
- */
-
 const REFRESH_MS = 10000;
 const SYMBOL = "BTCUSDT";
 
@@ -594,7 +530,6 @@ function drawSparkline(values) {
     ctx.clearRect(0, 0, w, h);
 
     if (!values || values.length < 2) {
-        // faint baseline
         ctx.globalAlpha = 0.35;
         ctx.strokeStyle = "#ffffff";
         ctx.beginPath();
@@ -609,7 +544,6 @@ function drawSparkline(values) {
     const max = Math.max(...values);
     const range = (max - min) || 1;
 
-    // grid line
     ctx.globalAlpha = 0.25;
     ctx.strokeStyle = "#ffffff";
     ctx.beginPath();
@@ -618,7 +552,6 @@ function drawSparkline(values) {
     ctx.stroke();
     ctx.globalAlpha = 1;
 
-    // line
     ctx.strokeStyle = "#ffffff";
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -632,7 +565,6 @@ function drawSparkline(values) {
 
     ctx.stroke();
 
-    // last point
     const last = values[values.length - 1];
     const x = w;
     const y = h - ((last - min) / range) * (h - 10) - 5;
@@ -647,16 +579,12 @@ function setFundingStyles(rate) {
     const fundingVal = document.getElementById("fundingVal");
     const bias = document.getElementById("fundingBias");
 
-    // rate is decimal, like -0.000058
     if (rate === null || rate === undefined || Number.isNaN(rate)) {
         fundingVal.className = "metric-value";
         bias.innerText = "—";
         return;
     }
 
-    // color logic:
-    // negative funding => shorts pay => often "short-biased" crowd; we display as green-ish (up)
-    // positive funding => longs pay => often "long crowded"; display as red-ish (down)
     if (rate < 0) {
         fundingVal.className = "metric-value up";
         bias.innerText = "Short-crowded";
@@ -683,9 +611,7 @@ function setOISignal(oiDeltaPct, fundingRate) {
         return;
     }
 
-    // simple desk-style heuristic
-    // thresholds are intentionally small for 10s refresh; you can tune later
-    const oiUp = oiDeltaPct > 0.25;   // +0.25% per refresh window
+    const oiUp = oiDeltaPct > 0.25;
     const oiDown = oiDeltaPct < -0.25;
 
     let signal = "Neutral";
@@ -706,21 +632,18 @@ async function fetchBinance() {
         setDot("warn");
         setUpdateText("Updating…");
 
-        // 1) Open Interest (contracts)
         const oiRes = await fetch(`https://fapi.binance.com/fapi/v1/openInterest?symbol=${SYMBOL}`);
         const oiJson = await oiRes.json();
         const oi = Number(oiJson.openInterest);
 
-        // 2) Funding + Mark + Index + Next Funding Time
         const premRes = await fetch(`https://fapi.binance.com/fapi/v1/premiumIndex?symbol=${SYMBOL}`);
         const premJson = await premRes.json();
 
-        const fundingRate = Number(premJson.lastFundingRate); // decimal
+        const fundingRate = Number(premJson.lastFundingRate);
         const markPrice = Number(premJson.markPrice);
         const indexPrice = Number(premJson.indexPrice);
         const nextFundingTime = Number(premJson.nextFundingTime);
 
-        // 3) 24h stats (volume/high/low/change)
         const statsRes = await fetch(`https://fapi.binance.com/fapi/v1/ticker/24hr?symbol=${SYMBOL}`);
         const statsJson = await statsRes.json();
 
@@ -729,7 +652,6 @@ async function fetchBinance() {
         const vol = Number(statsJson.volume);
         const priceChangePct = Number(statsJson.priceChangePercent);
 
-        // Update UI
         document.getElementById("oiVal").innerText = fmtCompact(oi);
         document.getElementById("fundingVal").innerText = (fundingRate * 100).toFixed(4) + " %";
         document.getElementById("markVal").innerText = fmtNumber(markPrice, 2) + " USDT";
@@ -744,7 +666,6 @@ async function fetchBinance() {
         document.getElementById("nextFundingTime").innerText =
             Number.isFinite(nextFundingTime) ? msToHHMM(nextFundingTime) : "—";
 
-        // OI deltas
         let deltaAbs = null;
         let deltaPct = null;
 
@@ -762,8 +683,7 @@ async function fetchBinance() {
             deltaAbsEl.className = cls;
             deltaPctEl.className = cls;
 
-            // Flash on bigger moves
-            if (Math.abs(deltaPct) >= 0.6) { // tune threshold
+            if (Math.abs(deltaPct) >= 0.6) {
                 flashCard(oiCard);
             }
         } else {
@@ -773,7 +693,6 @@ async function fetchBinance() {
             document.getElementById("oiDeltaPct").className = "neutral";
         }
 
-        // Save & sparkline
         lastOI = oi;
         if (Number.isFinite(oi)) {
             oiHistory.push(oi);
@@ -781,28 +700,22 @@ async function fetchBinance() {
             drawSparkline(oiHistory);
         }
 
-        // Funding styling & signal
         setFundingStyles(fundingRate);
         setOISignal(deltaPct, fundingRate);
 
-        // Status
         const now = new Date();
         setDot("ok");
         setUpdateText(`Updated ${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}:${String(now.getSeconds()).padStart(2,"0")}`);
 
-        // Remove any "blocked" look
         box.style.opacity = "1";
     } catch (e) {
         console.error("Binance fetch error:", e);
         setDot("bad");
         setUpdateText("API error");
-        // soften UI if blocked
-        const box = document.getElementById("binanceBox");
         box.style.opacity = "0.9";
     }
 }
 
-// Run now + repeat
 fetchBinance();
 setInterval(fetchBinance, REFRESH_MS);
 </script>
